@@ -38,7 +38,9 @@ jobs:
           echo "WEBAPP_URL=${WEBAPP_URL}" >> .env
           
           echo "🗄 Підготовка бази даних..."
-          touch quest_bot.db
+          if [ ! -e quest_bot.db ]; then
+            touch quest_bot.db
+          fi
           
           echo "🐳 Запуск Docker..."
           if docker compose version > /dev/null 2>&1; then
