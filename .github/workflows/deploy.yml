@@ -8,42 +8,49 @@ on:
 
 jobs:
   deploy:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Auto-Deploy to AppData
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           ADMIN_IDS: ${{ secrets.ADMIN_IDS }}
           WEBAPP_URL: ${{ secrets.WEBAPP_URL }}
-        run: |
-          TARGET_DIR="/DATA/AppData/quest-bot"
-          
-          echo "🚀 Створення директорії $TARGET_DIR..."
-          mkdir -p $TARGET_DIR
-          
-          echo "📁 Копіювання файлів..."
-          # Копіюємо всі файли з завантаженого репозиторію у потрібну папку (з перезаписом)
-          cp -a . $TARGET_DIR/
-          
-          echo "⚙️ Перехід у папку..."
-          cd $TARGET_DIR
-          
-          echo "🔑 Створення .env файлу..."
-          echo "BOT_TOKEN=${BOT_TOKEN}" > .env
-          echo "ADMIN_IDS=${ADMIN_IDS}" >> .env
-          echo "WEBAPP_URL=${WEBAPP_URL}" >> .env
-          
-          echo "🐳 Запуск Docker..."
-          if docker compose version > /dev/null 2>&1; then
-            docker compose down
-            docker compose up -d --build
-          else
-            docker-compose down
-            docker-compose up -d --build
-          fi
-          
-          echo "✅ Деплой успішно завершено!"
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SERVER_KEY }}
+          port: ${{ secrets.SERVER_PORT || 22 }}
+          envs: BOT_TOKEN,ADMIN_IDS,WEBAPP_URL
+          script: |
+            TARGET_DIR="/DATA/AppData/quest-bot"
+            
+            echo "🚀 Створення директорії $TARGET_DIR..."
+            mkdir -p $TARGET_DIR
+            cd $TARGET_DIR
+            
+            echo "📁 Оновлення коду..."
+            if [ ! -d ".git" ]; then
+              git clone https://github.com/kozichuk-labs/quest-bot.git .
+            else
+              # На випадок конфліктів робимо жорстке оновлення
+              git fetch origin main
+              git reset --hard origin/main
+            fi
+            
+            echo "🔑 Створення .env файлу..."
+            echo "BOT_TOKEN=${BOT_TOKEN}" > .env
+            echo "ADMIN_IDS=${ADMIN_IDS}" >> .env
+            echo "WEBAPP_URL=${WEBAPP_URL}" >> .env
+            
+            echo "🐳 Запуск Docker..."
+            if docker compose version > /dev/null 2>&1; then
+              docker compose down
+              docker compose up -d --build
+            else
+              docker-compose down
+              docker-compose up -d --build
+            fi
+            
+            echo "✅ Деплой успішно завершено!"
