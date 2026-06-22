@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   bot:
-    image: ghcr.io/Xlappy/quest-bot:latest
+    image: ghcr.io/kozichuk-labs/quest-bot:latest
     container_name: quest_bot
     restart: unless-stopped
     ports:
