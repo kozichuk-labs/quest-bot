@@ -38,6 +38,11 @@ jobs:
           echo "WEBAPP_URL=${WEBAPP_URL}" >> .env
           
           echo "🗄 Підготовка бази даних..."
+          if [ -d quest_bot.db ]; then
+            echo "Видаляємо папку-привид quest_bot.db, яку створив Docker..."
+            rm -rf quest_bot.db
+          fi
+          
           if [ ! -e quest_bot.db ]; then
             touch quest_bot.db
           fi
