@@ -11,16 +11,33 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: Pull Latest Code and Restart Containers
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Auto-Deploy to AppData
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          ADMIN_IDS: ${{ secrets.ADMIN_IDS }}
+          WEBAPP_URL: ${{ secrets.WEBAPP_URL }}
         run: |
-          # ВАЖЛИВО: Замініть цей шлях на реальний шлях до папки quest-bot на вашому сервері
-          # Наприклад: cd /DATA/AppData/quest-bot
-          cd /DATA/AppData/quest-bot
+          TARGET_DIR="/DATA/AppData/quest-bot"
           
-          # Оновлюємо код
-          git pull origin main
+          echo "🚀 Створення директорії $TARGET_DIR..."
+          mkdir -p $TARGET_DIR
           
-          # Перезапускаємо контейнери
+          echo "📁 Копіювання файлів..."
+          # Копіюємо всі файли з завантаженого репозиторію у потрібну папку (з перезаписом)
+          cp -a . $TARGET_DIR/
+          
+          echo "⚙️ Перехід у папку..."
+          cd $TARGET_DIR
+          
+          echo "🔑 Створення .env файлу..."
+          echo "BOT_TOKEN=${BOT_TOKEN}" > .env
+          echo "ADMIN_IDS=${ADMIN_IDS}" >> .env
+          echo "WEBAPP_URL=${WEBAPP_URL}" >> .env
+          
+          echo "🐳 Запуск Docker..."
           if docker compose version > /dev/null 2>&1; then
             docker compose down
             docker compose up -d --build
@@ -28,3 +45,5 @@ jobs:
             docker-compose down
             docker-compose up -d --build
           fi
+          
+          echo "✅ Деплой успішно завершено!"
