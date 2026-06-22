@@ -23,30 +23,30 @@ jobs:
           TARGET_DIR="/DATA/AppData/quest-bot"
           
           echo "🚀 Створення директорії $TARGET_DIR..."
-          mkdir -p $TARGET_DIR
+          sudo mkdir -p $TARGET_DIR
           
           echo "📁 Копіювання файлів..."
-          cp -a . $TARGET_DIR/
+          # Використовуємо rsync замість cp, щоб не копіювати папку .git і уникати конфліктів прав
+          sudo rsync -a --exclude='.git' . $TARGET_DIR/
           
           echo "⚙️ Перехід у папку..."
           cd $TARGET_DIR
           
           echo "🔑 Створення .env файлу..."
-          echo "BOT_TOKEN=${BOT_TOKEN}" > .env
-          echo "ADMIN_IDS=${ADMIN_IDS}" >> .env
-          echo "WEBAPP_URL=${WEBAPP_URL}" >> .env
+          echo "BOT_TOKEN=${BOT_TOKEN}" | sudo tee .env > /dev/null
+          echo "ADMIN_IDS=${ADMIN_IDS}" | sudo tee -a .env > /dev/null
+          echo "WEBAPP_URL=${WEBAPP_URL}" | sudo tee -a .env > /dev/null
           
           echo "🗄 Підготовка бази даних..."
-          # Якщо файл бази не існує, створюємо пустий файл, щоб Docker не створив папку замість нього!
-          touch quest_bot.db
+          sudo touch quest_bot.db
           
           echo "🐳 Запуск Docker..."
-          if docker compose version > /dev/null 2>&1; then
-            docker compose down
-            docker compose up -d --build
+          if sudo docker compose version > /dev/null 2>&1; then
+            sudo docker compose down
+            sudo docker compose up -d --build
           else
-            docker-compose down
-            docker-compose up -d --build
+            sudo docker-compose down
+            sudo docker-compose up -d --build
           fi
           
           echo "✅ Деплой успішно завершено!"
