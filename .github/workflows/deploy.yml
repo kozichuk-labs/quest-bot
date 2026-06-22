@@ -36,6 +36,10 @@ jobs:
           echo "ADMIN_IDS=${ADMIN_IDS}" >> .env
           echo "WEBAPP_URL=${WEBAPP_URL}" >> .env
           
+          echo "🗄 Підготовка бази даних..."
+          # Якщо файл бази не існує, створюємо пустий файл, щоб Docker не створив папку замість нього!
+          touch quest_bot.db
+          
           echo "🐳 Запуск Docker..."
           if docker compose version > /dev/null 2>&1; then
             docker compose down
