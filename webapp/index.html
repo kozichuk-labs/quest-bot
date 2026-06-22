@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quest Bot Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div id="app">
+        <header class="glass-header">
+            <h1>Quest Admin</h1>
+            <div id="stats" class="stats-row">
+                <div class="stat-card">
+                    <span class="stat-value" id="totalUsers">0</span>
+                    <span class="stat-label">Users</span>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="search-bar glass-panel">
+                <input type="text" id="searchInput" placeholder="Search users...">
+            </div>
+
+            <div id="usersList" class="users-grid">
+                <!-- Users will be injected here -->
+                <div class="loading">Loading...</div>
+            </div>
+        </main>
+
+        <!-- User Action Modal -->
+        <div id="actionModal" class="modal-overlay hidden">
+            <div class="modal-content glass-panel">
+                <div class="modal-header">
+                    <div class="modal-avatar" id="modalAvatar"></div>
+                    <h2 id="modalName">User Name</h2>
+                    <span id="modalId" class="modal-subtitle"></span>
+                </div>
+                
+                <div class="modal-body">
+                    <div class="info-row">
+                        <span>Справжнє ім'я:</span>
+                        <strong id="modalRealName">Unknown</strong>
+                    </div>
+                    <div class="info-row">
+                        <span>Вік:</span>
+                        <strong id="modalAge">Unknown</strong>
+                    </div>
+                    <div class="info-row">
+                        <span>Поточний стан:</span>
+                        <strong id="modalState">WaitQuest1</strong>
+                    </div>
+                    <div class="info-row">
+                        <span>Пройдено разів:</span>
+                        <strong id="modalPasses">0</strong>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <a id="btnProfile" class="btn btn-secondary mt-3" target="_blank" style="display: block; text-align: center; text-decoration: none;">👤 Перейти в профіль</a>
+                        <button id="btnReset" class="btn btn-danger mt-3">🔄 Скинути прогрес</button>
+                    </div>
+                    
+                    <div class="message-box">
+                        <textarea id="messageInput" placeholder="Write a message to this user..."></textarea>
+                        <button id="btnSendMessage" class="btn btn-primary">Send Message</button>
+                    </div>
+                </div>
+                <button id="btnCloseModal" class="btn btn-secondary mt-3">Close</button>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  bot:
+    image: ghcr.io/Xlappy/quest-bot:latest
+    container_name: quest_bot
+    restart: unless-stopped
+    ports:
+      - "6767:6767"
+    volumes:
+      - ./quest_bot.db:/app/quest_bot.db
+      - ./.env:/app/.env
+    environment:
+      - TZ=Europe/Kyiv

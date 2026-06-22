@@ -1,0 +1,83 @@
+{
+  "dialogs": {
+    "start": "Привіт! Як тебе звати?",
+    "ask_age": "Супер! А скільки тобі років?",
+    "start_quest_1": "Чекаю відповідь на 1 квест в чаті.",
+    "invalid_name": "Ім'я не може містити цифри! Введи, будь ласка, своє справжнє ім'я літерами.",
+    "invalid_age": "Будь ласка, введи свій вік цифрами (наприклад: 25).",
+    "reset_confirmation": "Ти впевнений, що хочеш скинути свій прогрес і почати квести спочатку?",
+    "reset_done": "Прогрес скинуто. Починаємо спочатку!",
+    "reset_cancelled": "Скидання скасовано. Продовжуємо з поточного квесту.",
+    "no_more_quests": "Більше квестів поки @yurapxl не придумав."
+  },
+  "quests": {
+    "1": {
+      "answer": "парус",
+      "wrong_answer": "Неправильна відповідь, спробуй ще.",
+      "invalid_quest_answer": "Відповідь не може містити цифри. Вводь лише букви!",
+      "correct_answer_message": "Правильно! Ти відгадав.",
+      "next_quest_button_text": "Перейти до 2 квесту ➡️",
+      "next_quest_message": "Чекаю відповіді на 2 квест.",
+      "next_quest_photo": "photos/quest2.jpg",
+      "next_quest_description": "Опис рисунок 2",
+      "hint_text": "Всі ми деколи забуваємо змінити розкладку, а ще противник дуже чітко влучив в наші кораблі",
+      "hint_delay_seconds": 250000,
+      "hint_button_text": "💡 Взяти підказку",
+      "hint_alert_success": "Підказку замовлено!",
+      "hint_alert_exists": "Вже замовлено",
+      "hint_requested": "💡 Підказку замовлено! Вона з'явиться тут через 3 доби",
+      "hint_already_requested": "Ти вже замовляв підказку для цього квесту.",
+      "hint_message_format": "💡 **ПІДКАЗКА для Квесту {quest_number}**:\n\n{hint_text}"
+    },
+    "2": {
+      "answer": "зірка",
+      "wrong_answer": "Неправильна відповідь, спробуй ще.",
+      "invalid_quest_answer": "Відповідь не може містити цифри. Вводь лише букви!",
+      "correct_answer_message": "Правильно! Ти відгадав.",
+      "next_quest_button_text": "Перейти до 3 квесту ➡️",
+      "next_quest_message": "Чекаю відповіді на 3 квест.",
+      "next_quest_photo": "photos/quest3.jpg",
+      "next_quest_description": "Опис рисунок 3",
+      "hint_text": "Вона світить на небі вночі...",
+      "hint_delay_seconds": 250000,
+      "hint_button_text": "💡 Взяти підказку",
+      "hint_alert_success": "Підказку замовлено!",
+      "hint_alert_exists": "Вже замовлено",
+      "hint_requested": "💡 Підказку замовлено! Вона з'явиться тут через 3 доби.",
+      "hint_already_requested": "Ти вже замовляв підказку для цього квесту.",
+      "hint_message_format": "💡 **ПІДКАЗКА для Квесту {quest_number}**:\n\n{hint_text}"
+    },
+    "3": {
+      "answer": "інтерес",
+      "wrong_answer": "Неправильна відповідь, спробуй ще.",
+      "invalid_quest_answer": "Відповідь не може містити цифри. Вводь лише букви!",
+      "correct_answer_message": "Правильно! Ти відгадав.",
+      "next_quest_button_text": "Перейти до останнього квесту ➡️",
+      "next_quest_message": "Чекаю відповіді на останній квест.",
+      "next_quest_photo": "photos/quest4.jpg",
+      "next_quest_description": "Ось ребус. Розгадай його!",
+      "hint_text": "Це синонім слова 'зацікавленість'...",
+      "hint_delay_seconds": 250000,
+      "hint_button_text": "💡 Взяти підказку",
+      "hint_alert_success": "Підказку замовлено!",
+      "hint_alert_exists": "Вже замовлено",
+      "hint_requested": "💡 Підказку замовлено! Вона з'явиться тут через 3 доби.",
+      "hint_already_requested": "Ти вже замовляв підказку для цього квесту.",
+      "hint_message_format": "💡 **ПІДКАЗКА для Квесту {quest_number}**:\n\n{hint_text}"
+    },
+    "4": {
+      "answer": "касета",
+      "wrong_answer": "Неправильна відповідь, спробуй ще.",
+      "invalid_quest_answer": "Відповідь не може містити цифри. Вводь лише букви!",
+      "final_message": "Ти молодець, можеш піти на кухню взяти пряника, а ще поділитися цим з @yurapxl",
+      "hint_text": "На неї раніше записували музику...",
+      "hint_delay_seconds": 250000,
+      "hint_button_text": "💡 Взяти підказку",
+      "hint_alert_success": "Підказку замовлено!",
+      "hint_alert_exists": "Вже замовлено",
+      "hint_requested": "💡 Підказку замовлено! Вона з'явиться тут через 3 доби.",
+      "hint_already_requested": "Ти вже замовляв підказку для цього квесту.",
+      "hint_message_format": "💡 **ПІДКАЗКА для Квесту {quest_number}**:\n\n{hint_text}"
+    }
+  }
+}
